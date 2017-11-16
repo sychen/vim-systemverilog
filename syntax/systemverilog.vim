@@ -20,6 +20,10 @@ endif
 " Elements
 " =====================
 
+" Operator
+" it is moved above comment, to lower its priority
+syntax match   systemverilogOperator "[&|~><!)(*#%@+/=?:;}{,.\^\-\[\]]"
+
 " Comment
 syntax region   systemverilogComment    start="/\*" end="\*/" contains=systemverilogTodo,@Spell
 syntax match    systemverilogComment    "//.*$" contains=systemverilogTodo,@Spell
@@ -51,8 +55,8 @@ syntax match   systemverilogFloat  "\<[+-]\=[0-9_]\+\(\.[0-9_]*\|\)\(e[0-9_]*\|\
 " Identifier
 syntax keyword     systemverilogIdentifier         super this
 syntax keyword     systemverilogIdentifier         option type_option
-syntax match       systemverilogSystemTask         "\$root"
-syntax match       systemverilogSystemTask         "\$unit"
+syntax match       systemverilogIdentifier         "\$root"
+syntax match       systemverilogIdentifier         "\$unit"
 
 " Function
 " @object
@@ -63,36 +67,253 @@ syntax keyword systemverilogFunction sample
 syntax match   systemverilogFunction "\(process::\)\@<=self"
 
 " @system tasks
-syntax match       systemverilogSystemTask         "\$sformatf\>"
-syntax match       systemverilogSystemTask         "\$sformat\>"
-syntax match       systemverilogSystemTask         "\$swrite\>"
-syntax match       systemverilogSystemTask         "\$bits"
-syntax match       systemverilogSystemTask         "\$cast"
-syntax match       systemverilogSystemTask         "\$urandom"
-syntax match       systemverilogSystemTask         "\$isunknown"
-syntax match       systemverilogSystemTask         "\$realtime"
-syntax match       systemverilogSystemTask         "\$f\(display\|open\|close\)"
-syntax match       systemverilogSystemTask         "\$time"
+" simulation control tasks
+syntax match systemverilogSystemTask "\$finish\>"
+syntax match systemverilogSystemTask "\$stop\>"
+syntax match systemverilogSystemTask "\$exit\>"
+" simulation time functions
+syntax match systemverilogSystemTask "\$realtime\>"
+syntax match systemverilogSystemTask "\$stime\>"
+syntax match systemverilogSystemTask "\$time\>"
+" timescale tasks
+syntax match systemverilogSystemTask "\$printtimescale\>"
+syntax match systemverilogSystemTask "\$timeformat\>"
+" conversion functions
+syntax match systemverilogSystemTask "\$bitstoreal\>"
+syntax match systemverilogSystemTask "\$realtobits\>"
+syntax match systemverilogSystemTask "\$bitstoshortreal\>"
+syntax match systemverilogSystemTask "\$shortrealtobits\>"
+syntax match systemverilogSystemTask "\$itor\>"
+syntax match systemverilogSystemTask "\$rtoi\>"
+syntax match systemverilogSystemTask "\$signed\>"
+syntax match systemverilogSystemTask "\$unsigned\>"
+syntax match systemverilogSystemTask "\$cast\>"
+" data query functions
+syntax match systemverilogSystemTask "\$bits\>"
+syntax match systemverilogSystemTask "\$isunbounded\>"
+syntax match systemverilogSystemTask "\$typename\>"
+" array query functions
+syntax match systemverilogSystemTask "\$unpacked_dimensions\>"
+syntax match systemverilogSystemTask "\$dimensions\>"
+syntax match systemverilogSystemTask "\$left\>"
+syntax match systemverilogSystemTask "\$right\>"
+syntax match systemverilogSystemTask "\$low\>"
+syntax match systemverilogSystemTask "\$high\>"
+syntax match systemverilogSystemTask "\$increment\>"
+syntax match systemverilogSystemTask "\$size\>"
+" math functions
+syntax match systemverilogSystemTask "\$clog2\>"
+syntax match systemverilogSystemTask "\$ln\>"
+syntax match systemverilogSystemTask "\$log10\>"
+syntax match systemverilogSystemTask "\$exp\>"
+syntax match systemverilogSystemTask "\$sqrt\>"
+syntax match systemverilogSystemTask "\$pow\>"
+syntax match systemverilogSystemTask "\$floor\>"
+syntax match systemverilogSystemTask "\$ceil\>"
+syntax match systemverilogSystemTask "\$sin\>"
+syntax match systemverilogSystemTask "\$cos\>"
+syntax match systemverilogSystemTask "\$tan\>"
+syntax match systemverilogSystemTask "\$asin\>"
+syntax match systemverilogSystemTask "\$acos\>"
+syntax match systemverilogSystemTask "\$atan\>"
+syntax match systemverilogSystemTask "\$atan2\>"
+syntax match systemverilogSystemTask "\$hypot\>"
+syntax match systemverilogSystemTask "\$sinh\>"
+syntax match systemverilogSystemTask "\$cosh\>"
+syntax match systemverilogSystemTask "\$tanh\>"
+syntax match systemverilogSystemTask "\$asinh\>"
+syntax match systemverilogSystemTask "\$acosh\>"
+syntax match systemverilogSystemTask "\$atanh\>"
+" bit vector system functions
+syntax match systemverilogSystemTask "\$countbits\>"
+syntax match systemverilogSystemTask "\$countones\>"
+syntax match systemverilogSystemTask "\$onehot\>"
+syntax match systemverilogSystemTask "\$onehot0\>"
+syntax match systemverilogSystemTask "\$isunknown\>"
+" severity/elaboration tasks
+syntax match systemverilogSystemTask "\$fatal\>"
+syntax match systemverilogSystemTask "\$error\>"
+syntax match systemverilogSystemTask "\$warning\>"
+syntax match systemverilogSystemTask "\$info\>"
+" assertion control tasks
+syntax match systemverilogSystemTask "\$asserton\>"
+syntax match systemverilogSystemTask "\$assertoff\>"
+syntax match systemverilogSystemTask "\$assertkill\>"
+syntax match systemverilogSystemTask "\$assertcontrol\>"
+syntax match systemverilogSystemTask "\$assertpasson\>"
+syntax match systemverilogSystemTask "\$assertpassoff\>"
+syntax match systemverilogSystemTask "\$assertfailon\>"
+syntax match systemverilogSystemTask "\$assertfailoff\>"
+syntax match systemverilogSystemTask "\$assertnonvacuouson\>"
+syntax match systemverilogSystemTask "\$assertnonvacuousoff\>"
+" sampled value system functions
+syntax match systemverilogSystemTask "\$sampled\>"
+syntax match systemverilogSystemTask "\$rose\>"
+syntax match systemverilogSystemTask "\$fell\>"
+syntax match systemverilogSystemTask "\$stable\>"
+syntax match systemverilogSystemTask "\$changed\>"
+syntax match systemverilogSystemTask "\$past\>"
+syntax match systemverilogSystemTask "\$past_gclk\>"
+syntax match systemverilogSystemTask "\$rose_gclk\>"
+syntax match systemverilogSystemTask "\$fell_gclk\>"
+syntax match systemverilogSystemTask "\$stable_gclk\>"
+syntax match systemverilogSystemTask "\$changed_gclk\>"
+syntax match systemverilogSystemTask "\$future_gclk\>"
+syntax match systemverilogSystemTask "\$rising_gclk\>"
+syntax match systemverilogSystemTask "\$falling_gclk\>"
+syntax match systemverilogSystemTask "\$steady_gclk\>"
+syntax match systemverilogSystemTask "\$changing_gclk\>"
+" coverage control functions
+syntax match systemverilogSystemTask "\$coverage_control\>"
+syntax match systemverilogSystemTask "\$coverage_get_max\>"
+syntax match systemverilogSystemTask "\$coverage_get\>"
+syntax match systemverilogSystemTask "\$coverage_merge\>"
+syntax match systemverilogSystemTask "\$coverage_save\>"
+syntax match systemverilogSystemTask "\$get_coverage\>"
+syntax match systemverilogSystemTask "\$set_coverage_db_name\>"
+syntax match systemverilogSystemTask "\$load_coverage_db\>"
+" probabilistic distribution functions
+syntax match systemverilogSystemTask "\$random\>"
+syntax match systemverilogSystemTask "\$dist_chi_square\>"
+syntax match systemverilogSystemTask "\$dist_erlang\>"
+syntax match systemverilogSystemTask "\$dist_exponential\>"
+syntax match systemverilogSystemTask "\$dist_normal\>"
+syntax match systemverilogSystemTask "\$dist_poisson\>"
+syntax match systemverilogSystemTask "\$dist_t\>"
+syntax match systemverilogSystemTask "\$dist_uniform\>"
+" stochastic analysis tasks and functions
+syntax match systemverilogSystemTask "\$q_initialize\>"
+syntax match systemverilogSystemTask "\$q_add\>"
+syntax match systemverilogSystemTask "\$q_remove\>"
+syntax match systemverilogSystemTask "\$q_full\>"
+syntax match systemverilogSystemTask "\$q_exam\>"
+" PLA modeling tasks
+syntax match systemverilogSystemTask "\$async$and$array\>"
+syntax match systemverilogSystemTask "\$async$nand$array\>"
+syntax match systemverilogSystemTask "\$async$or$array\>"
+syntax match systemverilogSystemTask "\$async$nor$array\>"
+syntax match systemverilogSystemTask "\$sync$and$array\>"
+syntax match systemverilogSystemTask "\$sync$nand$array\>"
+syntax match systemverilogSystemTask "\$sync$or$array\>"
+syntax match systemverilogSystemTask "\$sync$nor$array\>"
+syntax match systemverilogSystemTask "\$async$and$plane\>"
+syntax match systemverilogSystemTask "\$async$nand$plane\>"
+syntax match systemverilogSystemTask "\$async$or$plane\>"
+syntax match systemverilogSystemTask "\$async$nor$plane\>"
+syntax match systemverilogSystemTask "\$sync$and$plane\>"
+syntax match systemverilogSystemTask "\$sync$nand$plane\>"
+syntax match systemverilogSystemTask "\$sync$or$plane\>"
+syntax match systemverilogSystemTask "\$sync$nor$plane\>"
+" miscellaneous
+syntax match systemverilogSystemTask "\$system\>"
+" display tasks
+syntax match systemverilogSystemTask "\$display\>"
+syntax match systemverilogSystemTask "\$displayb\>"
+syntax match systemverilogSystemTask "\$displayh\>"
+syntax match systemverilogSystemTask "\$displayo\>"
+syntax match systemverilogSystemTask "\$strobe\>"
+syntax match systemverilogSystemTask "\$strobeb\>"
+syntax match systemverilogSystemTask "\$strobeh\>"
+syntax match systemverilogSystemTask "\$strobeo\>"
+syntax match systemverilogSystemTask "\$write\>"
+syntax match systemverilogSystemTask "\$writeb\>"
+syntax match systemverilogSystemTask "\$writeh\>"
+syntax match systemverilogSystemTask "\$writeo\>"
+syntax match systemverilogSystemTask "\$monitor\>"
+syntax match systemverilogSystemTask "\$monitorb\>"
+syntax match systemverilogSystemTask "\$monitorh\>"
+syntax match systemverilogSystemTask "\$monitoro\>"
+syntax match systemverilogSystemTask "\$monitoron\>"
+syntax match systemverilogSystemTask "\$monitoroff\>"
+" file I/O tasks and functions
+syntax match systemverilogSystemTask "\$fopen\>"
+syntax match systemverilogSystemTask "\$fclose\>"
 
-" assertion
-syntax match       systemverilogSystemTask         "\$fatal"
-syntax match       systemverilogSystemTask         "\$error"
-syntax match       systemverilogSystemTask         "\$warning"
-syntax match       systemverilogSystemTask         "\$info"
+syntax match systemverilogSystemTask "\$fdisplay\>"
+syntax match systemverilogSystemTask "\$fdisplayb\>"
+syntax match systemverilogSystemTask "\$fdisplayh\>"
+syntax match systemverilogSystemTask "\$fdisplayo\>"
 
+syntax match systemverilogSystemTask "\$fstrobe\>"
+syntax match systemverilogSystemTask "\$fstrobeb\>"
+syntax match systemverilogSystemTask "\$fstrobeh\>"
+syntax match systemverilogSystemTask "\$fstrobeo\>"
+
+syntax match systemverilogSystemTask "\$fwrite\>"
+syntax match systemverilogSystemTask "\$fwriteb\>"
+syntax match systemverilogSystemTask "\$fwriteh\>"
+syntax match systemverilogSystemTask "\$fwriteo\>"
+
+syntax match systemverilogSystemTask "\$fmonitor\>"
+syntax match systemverilogSystemTask "\$fmonitorb\>"
+syntax match systemverilogSystemTask "\$fmonitorh\>"
+syntax match systemverilogSystemTask "\$fmonitoro\>"
+
+syntax match systemverilogSystemTask "\$swrite\>"
+syntax match systemverilogSystemTask "\$swriteb\>"
+syntax match systemverilogSystemTask "\$swriteh\>"
+syntax match systemverilogSystemTask "\$swriteo\>"
+
+syntax match systemverilogSystemTask "\$sformat\>"
+syntax match systemverilogSystemTask "\$sformatf\>"
+
+syntax match systemverilogSystemTask "\$fgetc\>"
+syntax match systemverilogSystemTask "\$ungetc\>"
+syntax match systemverilogSystemTask "\$fgets\>"
+syntax match systemverilogSystemTask "\$fscanf\>"
+syntax match systemverilogSystemTask "\$sscanf\>"
+syntax match systemverilogSystemTask "\$fread\>"
+
+syntax match systemverilogSystemTask "\$ftell\>"
+syntax match systemverilogSystemTask "\$fseek\>"
+syntax match systemverilogSystemTask "\$rewind\>"
+
+syntax match systemverilogSystemTask "\$fflush\>"
+syntax match systemverilogSystemTask "\$ferror\>"
+syntax match systemverilogSystemTask "\$feof\>"
+
+" memory load and dump tasks
+syntax match systemverilogSystemTask "\$readmemb\>"
+syntax match systemverilogSystemTask "\$readmemh\>"
+syntax match systemverilogSystemTask "\$writememb\>"
+syntax match systemverilogSystemTask "\$writememh\>"
+
+" command line input
+syntax match systemverilogSystemTask "\$test$plusargs\>"
+syntax match systemverilogSystemTask "\$value$plusargs\>"
+
+" VCD tasks
+syntax match systemverilogSystemTask "\$dumpfile\>"
+syntax match systemverilogSystemTask "\$dumpvars\>"
+syntax match systemverilogSystemTask "\$dumpoff\>"
+syntax match systemverilogSystemTask "\$dumpon\>"
+syntax match systemverilogSystemTask "\$dumpall\>"
+syntax match systemverilogSystemTask "\$dumplimit\>"
+syntax match systemverilogSystemTask "\$dumpflush\>"
+syntax match systemverilogSystemTask "\$dumpports\>"
+syntax match systemverilogSystemTask "\$dumpportsoff\>"
+syntax match systemverilogSystemTask "\$dumpportson\>"
+syntax match systemverilogSystemTask "\$dumpportsall\>"
+syntax match systemverilogSystemTask "\$dumpportslimit\>"
+syntax match systemverilogSystemTask "\$dumpportsflush\>"
+" random number system functions and methods
+syntax match systemverilogSystemTask "\$urandom"
+syntax match systemverilogSystemTask "\$urandom_range"
 " timing check
-syntax match       systemverilogSystemTask         "\$setup"
-syntax match       systemverilogSystemTask         "\$hold"
-syntax match       systemverilogSystemTask         "\$setuphold"
-syntax match       systemverilogSystemTask         "\$recovery"
-syntax match       systemverilogSystemTask         "\$removal"
-syntax match       systemverilogSystemTask         "\$recrem"
-syntax match       systemverilogSystemTask         "\$skew"
-syntax match       systemverilogSystemTask         "\$timeskew"
-syntax match       systemverilogSystemTask         "\$fullskew"
-syntax match       systemverilogSystemTask         "\$period"
-syntax match       systemverilogSystemTask         "\$width"
-syntax match       systemverilogSystemTask         "\$nochange"
+syntax match systemverilogSystemTask "\$setup"
+syntax match systemverilogSystemTask "\$hold"
+syntax match systemverilogSystemTask "\$setuphold"
+syntax match systemverilogSystemTask "\$recovery"
+syntax match systemverilogSystemTask "\$removal"
+syntax match systemverilogSystemTask "\$recrem"
+syntax match systemverilogSystemTask "\$skew"
+syntax match systemverilogSystemTask "\$timeskew"
+syntax match systemverilogSystemTask "\$fullskew"
+syntax match systemverilogSystemTask "\$period"
+syntax match systemverilogSystemTask "\$width"
+syntax match systemverilogSystemTask "\$nochange"
+
+
 
 " We leave general system tasks not highlighted,
 " so users can find typos if the highlight is not there
@@ -238,9 +459,6 @@ syntax keyword systemverilogLabel begin end
 " Default value in literals
 syntax keyword systemverilogLabel default
 
-" Operator
-syntax match   systemverilogOperator "[&|~><!)(*#%@+/=?:;}{,.\^\-\[\]]"
-
 syntax keyword systemverilogOperator new
 syntax keyword systemverilogOperator matches
 " @assertion
@@ -268,6 +486,9 @@ syntax keyword     systemverilogKeyword            extends
 syntax keyword     systemverilogKeyword            implements
 
 " PreProc
+syntax match systemverilogSpecial "`\""
+syntax match systemverilogSpecial "``"
+
 syntax match systemverilogPreProc "`celldefine"
 syntax match systemverilogPreProc "`endcelldefine"
 syntax match systemverilogPreProc "`default_nettype"
@@ -289,6 +510,8 @@ syntax match systemverilogDefine  "^\s*`\(undef\)\>"
 " Macro
 syntax match systemverilogMacro "`\<[A-Z][A-Z0-9_]*\>"
 
+syntax match systemverilogSpecialMacro "`__FILE__\>"
+syntax match systemverilogSpecialMacro "`__LINE__\>"
 " PreCondition
 syntax match       systemverilogPreCondition       "^\s*`\(ifdef\|ifndef\|else\|elsif\|endif\)\>"
 
@@ -300,10 +523,12 @@ syntax keyword systemverilogType real shortreal realtime
 syntax keyword systemverilogType void
 syntax keyword systemverilogType chandle
 syntax keyword systemverilogType string
-syntax keyword systemverilogType event
 syntax keyword systemverilogType untyped
 
-syntax keyword     systemverilogType               process
+syntax keyword systemverilogType process
+syntax keyword systemverilogType semaphore
+syntax keyword systemverilogType mailbox
+syntax keyword systemverilogType event
 
 syntax keyword systemverilogType interconnect
 " @ built-in net types
@@ -422,6 +647,7 @@ highlight default link systemverilogInclude         Include
 highlight default link systemverilogDefine          Define
 " same as Define
 highlight default link systemverilogMacro           Macro
+highlight default link systemverilogSpecialMacro    SpeicalMacro
 " preprocessor #if, #else, #endif, etc.
 highlight default link systemverilogPreCondition    PreCondit
 
