@@ -10,5 +10,7 @@ augroup filetypedetect
     autocmd BufNewFile,BufRead *.svap        setf systemverilog
     " Although Vera also has package files, but we focus on SystemVerilog now.
     autocmd BufNewFile,BufRead *.pkg         setf systemverilog
+    " Verilog include file
+    autocmd BufNewFile,BufRead *.inc         setf systemverilog
 augroup END
 
