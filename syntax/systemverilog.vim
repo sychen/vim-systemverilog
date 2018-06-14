@@ -320,18 +320,18 @@ syntax match systemverilogSystemTask "\$nochange"
 " syntax match systemverilogSystemTask "$[a-zA-Z0-9_]\+\>"
 
 " @string
-syntax match   systemverilogFunction "\(\.\)\@<=\(len\|puts\|getc\)"
-syntax match   systemverilogFunction "\(\.\)\@<=\(toupper\|tolower\)"
-syntax match   systemverilogFunction "\(\.\)\@<=\(compare\|icompare\|substr\)"
-syntax match   systemverilogFunction "\(\.\)\@<=\(atoi\|atohex\|atooct\|atobin\|atoreal\)"
-syntax match   systemverilogFunction "\(\.\)\@<=\(itoa\|hextoa\|octtoa\|bintoa\|realtoa\)"
+syntax match   systemverilogFunction "\(\.\)\@<=\(len\|puts\|getc\)\>"
+syntax match   systemverilogFunction "\(\.\)\@<=\(toupper\|tolower\)\>"
+syntax match   systemverilogFunction "\(\.\)\@<=\(compare\|icompare\|substr\)\>"
+syntax match   systemverilogFunction "\(\.\)\@<=\(atoi\|atohex\|atooct\|atobin\|atoreal\)\>"
+syntax match   systemverilogFunction "\(\.\)\@<=\(itoa\|hextoa\|octtoa\|bintoa\|realtoa\)\>"
 
 " @enumeration
-syntax match   systemverilogFunction "\(\.\)\@<=\(first\|last\|next\|prev\|num\|name\)"
+syntax match   systemverilogFunction "\(\.\)\@<=\(first\|last\|next\|prev\|num\|name\)\>"
 
 " @aggregation data types
-syntax match   systemverilogFunction "\(\.\)\@<=\(size\|delete\|exists\|insert\)"
-syntax match   systemverilogFunction "\(\.\)\@<=\(pop\|push\)_\(front\|back\)"
+syntax match   systemverilogFunction "\(\.\)\@<=\(size\|delete\|exists\|insert\)\>"
+syntax match   systemverilogFunction "\(\.\)\@<=\(pop\|push\)_\(front\|back\)\>"
 syntax match   systemverilogFunction "\(\.\)\@<=find\(_first\|_last\)\?\(_index\)\?\>"
 
 syntax match  systemverilogFunction  "\(\.\)\@<=index\>"
