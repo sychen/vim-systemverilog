@@ -85,6 +85,7 @@ function SystemVerilogIndent()
   " Indent after function/task/class/package/sequence/clocking/
   " interface/covergroup/property/checkerprogram blocks
   elseif last_line =~ '^\s*\<\(function\|task\|class\|package\)\>' ||
+    \ last_line =~ '^\s*virtual\s\s*\<\(function\|task\|class\)\>' ||
     \ last_line =~ '^\s*\<\(sequence\|clocking\|interface\)\>' ||
     \ last_line =~ '^\s*\(\w\+\s*:\)\=\s*\<covergroup\>' ||
     \ last_line =~ '^\s*\<\(property\|checker\|program\)\>'
@@ -190,6 +191,7 @@ function SystemVerilogIndent()
   " De-indent on a stand-alone 'begin'
   elseif curr_line =~ '^\s*\<begin\>'
     if last_line !~ '^\s*\<\(function\|task\|specify\|module\|class\|package\)\>' ||
+      \ last_line !~ '^\s*virtual\s\s*\<\(function\|task\|class\)\>' ||
       \ last_line !~ '^\s*\<\(sequence\|clocking\|interface\|covergroup\)\>' ||
       \ last_line !~ '^\s*\<\(property\|checker\|program\)\>' &&
       \ last_line !~ '^\s*\()*\s*;\|)\+\)\s*' . sv_comment . '*$' &&
